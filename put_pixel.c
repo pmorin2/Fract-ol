@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key.h                                              :+:      :+:    :+:   */
+/*   put_pixel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmorin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 13:32:33 by pmorin            #+#    #+#             */
-/*   Updated: 2018/12/17 13:32:35 by pmorin           ###   ########.fr       */
+/*   Created: 2018/12/17 14:31:43 by pmorin            #+#    #+#             */
+/*   Updated: 2018/12/17 15:43:20 by pmorin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEY_H
-# define KEY_H
-# define K_ESC 53
-# define K_TAB 48
-# define LEFT_ARROW 123
-# define RIGHT_ARROW 124
-# define UP_ARROW 126
-# define DOWN_ARROW 125
-# define K_PLUS 69
-# define K_MINUS 78
-#endif
+#include "fract_ol.h"
+#include "mlx.h"
+#include "libft.h"
+
+void	put_pixel_to_img(t_mlx *mlx, int color, int x, int y)
+{
+	unsigned int real_color;
+
+	real_color = mlx_get_color_value(mlx->init, color);
+	if (x < W_WIN && y < H_WIN)
+		ft_memcpy(mlx->img_ptr + 4 * W_WIN * y + 4 * x, &real_color
+					, sizeof(int));
+}
