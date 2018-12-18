@@ -21,4 +21,7 @@
 # define K_PLUS 69
 # define K_MINUS 78
 # define CTRL 256
+# define CLEAR
+# define PAGE_UP
+# define PAGE_DOWN
 #endif

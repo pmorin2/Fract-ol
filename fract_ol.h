@@ -47,5 +47,6 @@ int		keypress(int key, t_mlx *mlx);
 int		julia_mouse(int x, int y, t_mlx *mlx);
 int		palette(t_mlx *mlx, int i);
 int		frac_cal(t_mlx *mlx);
+int		frac_init(t_mlx *mlx);
 int		mouse_zoom(int button, int x, int y, t_mlx *mlx);
 #endif

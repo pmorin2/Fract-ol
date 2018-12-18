@@ -30,6 +30,10 @@ int	key_zoom_move(int key, t_mlx *mlx)
 		mlx->zoom += 10;
 	else if (key == K_MINUS)
 		mlx->zoom -= 10;
+	else if (key == PAGE_UP)
+	  mlx->imax += 10;
+	else if (key == PAGE_DOWN)
+	  mlx->imax -= 10;
 	return (0);
 }
 
@@ -44,12 +48,13 @@ int	keypress(int key, t_mlx *mlx)
 		exit(0);
 	}
 	else if (key == RIGHT_ARROW || key == LEFT_ARROW || key == UP_ARROW
-			 || key == DOWN_ARROW || key == K_PLUS || key == K_MINUS)
+			|| key == DOWN_ARROW || key == K_PLUS || key == K_MINUS
+		 || key == PAGE_UP || key == PAGE_DOWN)
 		key_zoom_move(key, mlx);
 	else if (key == CTRL && !ft_strcmp(mlx->name, "julia"))
-	{
 		mlx->mouse_act = (mlx->mouse_act + 1) % 2;
-	}
+	else if (key == CLEAR)
+		frac_init(mlx);
 	else
 		return (0);
 	mlx_destroy_image(mlx->init, mlx->img);

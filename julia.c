@@ -23,6 +23,8 @@ int		julia_init(t_mlx *mlx)
 	mlx->zoom = 250,0;
 	mlx->palette_nbr = 0;
 	mlx->mouse_act = 0;
+	mlx->c_r = 0.285;
+	mlx->c_i = 0.01
 	julia_calc(mlx);
 	return (0);
 }
@@ -43,8 +45,6 @@ void	julia_calc(t_mlx *mlx)
 		{
 			mlx->z_r = x / mlx->zoom + mlx->x1;
 			mlx->z_i= y / mlx->zoom + mlx->y1;
-			mlx->c_r = 0.285;
-			mlx->c_i = 0.01;
 			i = 0;
 			while (mlx->z_r * mlx->z_r + mlx->z_i * mlx->z_i < 4
 					&& i < mlx->imax)

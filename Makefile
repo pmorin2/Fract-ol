@@ -26,7 +26,7 @@ $(NAME): $(OBJS)
 	@gcc -o $@ $(OBJS) $(LIB) -lmlx -framework OpenGL -framework AppKit
 
 .c.o:
-	$(CC) -c $^ -o $@ $(FLAGS) -I libft/ -I minilix_macos/
+	$(CC) -c $^ -o $@ $(FLAGS) -I libft/ -I minilibx_macos/
 
 .PHONY: clean
 

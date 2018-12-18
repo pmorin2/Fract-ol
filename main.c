@@ -14,6 +14,15 @@
 #include "mlx.h"
 #include "libft.h"
 
+int	frac_init(t_mlx *mlx)
+{
+	if (!ft_strcmp(mlx->name, "mandelbrot"))
+		mandelbrot_init(mlx);
+	else if (!ft_strcmp(mlx->name, "julia"))
+		julia_init(mlx);
+	return (0);
+}
+
 int	frac_cal(t_mlx *mlx)
 {
 	if (!ft_strcmp(mlx->name, "mandelbrot"))
@@ -25,14 +34,11 @@ int	frac_cal(t_mlx *mlx)
 
 int	mlx_start(t_mlx *mlx)
 {
-	if (!ft_strcmp(mlx->name, "mandelbrot"))
-		mandelbrot_init(mlx);
-	else if (!ft_strcmp(mlx->name, "julia"))
-		julia_init(mlx);
+	frac_init(mlx);
 	mlx_hook(mlx->win, 6, 1L < 6, julia_mouse, mlx);
 	mlx_key_hook(mlx->win, keypress, mlx);
-    mlx_mouse_hook(mlx->win, mouse_zoom, mlx);
-    mlx_loop(mlx->init);
+	mlx_mouse_hook(mlx->win, mouse_zoom, mlx);
+	mlx_loop(mlx->init);
 	return (0);
 }
 
