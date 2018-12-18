@@ -6,7 +6,7 @@
 /*   By: pmorin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:39:38 by pmorin            #+#    #+#             */
-/*   Updated: 2018/12/17 16:51:11 by pmorin           ###   ########.fr       */
+/*   Updated: 2018/12/18 13:58:00 by pmorin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,25 @@
 #include "mlx.h"
 #include "libft.h"
 
-int	mlx_start(t_mlx *mlx, char *name)
+int	frac_cal(t_mlx *mlx)
 {
-	if (!ft_strcmp(name, "mandelbrot"))
-	{
-		mandelbrot(mlx);
-	}
+	if (!ft_strcmp(mlx->name, "mandelbrot"))
+		mandelbrot_calc(mlx);
+	else if (!ft_strcmp(mlx->name, "julia"))
+		julia_calc(mlx);
+	return (0);
+}
+
+int	mlx_start(t_mlx *mlx)
+{
+	if (!ft_strcmp(mlx->name, "mandelbrot"))
+		mandelbrot_init(mlx);
+	else if (!ft_strcmp(mlx->name, "julia"))
+		julia_init(mlx);
+	mlx_hook(mlx->win, 6, 1L < 6, julia_mouse, mlx);
+	mlx_key_hook(mlx->win, keypress, mlx);
+    mlx_mouse_hook(mlx->win, mouse_zoom, mlx);
+    mlx_loop(mlx->init);
 	return (0);
 }
 
@@ -44,6 +57,7 @@ int	main(int ac, char **av)
 		return(0);
 	}
 	mlx_set(&mlx);
-	mlx_start(&mlx, av[1]);
+	mlx.name = av[1];
+	mlx_start(&mlx);
 	return (0);
 }

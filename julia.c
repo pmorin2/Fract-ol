@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmorin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 14:01:54 by pmorin            #+#    #+#             */
-/*   Updated: 2018/12/18 11:39:04 by pmorin           ###   ########.fr       */
+/*   Created: 2018/12/18 13:22:03 by pmorin            #+#    #+#             */
+/*   Updated: 2018/12/18 13:54:28 by pmorin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,19 @@
 #include "libft.h"
 #include <stdio.h>
 
-int		mandelbrot_init(t_mlx *mlx)
+int		julia_init(t_mlx *mlx)
 {
-	mlx->x1 = -2.5;
-	mlx->y1 = -2.0;
+	mlx->x1 = -1.5;
+	mlx->y1 = -1.5;
 	mlx->imax = 50;
-	mlx->zoom = 200,0;
+	mlx->zoom = 250,0;
 	mlx->palette_nbr = 0;
-	mandelbrot_calc(mlx);
+	mlx->mouse_act = 0;
+	julia_calc(mlx);
 	return (0);
 }
 
-void	mandelbrot_calc(t_mlx *mlx)
+void	julia_calc(t_mlx *mlx)
 {
 	double x;
 	double y;
@@ -40,10 +41,10 @@ void	mandelbrot_calc(t_mlx *mlx)
 		y = -1;
 		while (++y < W_WIN)
 		{
-			mlx->c_r = x / mlx->zoom + mlx->x1;
-			mlx->c_i= y / mlx->zoom + mlx->y1;
-			mlx->z_r = 0;
-			mlx->z_i = 0;
+			mlx->z_r = x / mlx->zoom + mlx->x1;
+			mlx->z_i= y / mlx->zoom + mlx->y1;
+			mlx->c_r = 0.285;
+			mlx->c_i = 0.01;
 			i = 0;
 			while (mlx->z_r * mlx->z_r + mlx->z_i * mlx->z_i < 4
 					&& i < mlx->imax)

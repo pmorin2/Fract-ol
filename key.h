@@ -6,7 +6,7 @@
 /*   By: pmorin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 13:32:33 by pmorin            #+#    #+#             */
-/*   Updated: 2018/12/17 13:32:35 by pmorin           ###   ########.fr       */
+/*   Updated: 2018/12/18 13:46:54 by pmorin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,5 @@
 # define DOWN_ARROW 125
 # define K_PLUS 69
 # define K_MINUS 78
+# define CTRL 256
 #endif
