@@ -6,7 +6,7 @@
 /*   By: pmorin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 13:32:41 by pmorin            #+#    #+#             */
-/*   Updated: 2018/12/19 16:25:25 by pmorin           ###   ########.fr       */
+/*   Updated: 2018/12/19 16:18:08 by pmorin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	key_zoom_move(int key, t_mlx *mlx)
 int			keypress(int key, t_mlx *mlx)
 {
 	if (key == K_TAB)
-		mlx->palette_nbr = (mlx->palette_nbr + 1) % 8;
+		mlx->palette_nbr = (mlx->palette_nbr + 1) % 9;
 	else if (key == K_ESC)
 	{
 		mlx_destroy_image(mlx->init, mlx->img);

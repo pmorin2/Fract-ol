@@ -1,48 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   spider.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmorin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/18 13:22:03 by pmorin            #+#    #+#             */
-/*   Updated: 2018/12/19 16:02:53 by pmorin           ###   ########.fr       */
+/*   Created: 2018/12/19 14:19:59 by pmorin            #+#    #+#             */
+/*   Updated: 2018/12/19 15:56:29 by pmorin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fract_ol.h"
 #include "mlx.h"
 #include "libft.h"
+#include <math.h>
 #include <stdio.h>
 
-int			julia_init(t_mlx *mlx)
+int			spider_init(t_mlx *mlx)
 {
-	mlx->x1 = -1.5;
-	mlx->y1 = -1.5;
+	mlx->x1 = -2.5;
+	mlx->y1 = -2.0;
 	mlx->imax = 50;
-	mlx->zoom = 250.0;
+	mlx->zoom = 200.0;
 	mlx->palette_nbr = 0;
-	mlx->mouse_act = 0;
-	mlx->c_r = 0.285;
-	mlx->c_i = 0.01;
-	julia_calc(mlx);
+	spider_calc(mlx);
 	return (0);
 }
 
-static int	julia_while(int i, double tmp, t_mlx *mlx)
+static int	spider_while(int i, double tmp, t_mlx *mlx)
 {
 	while (mlx->z_r * mlx->z_r + mlx->z_i * mlx->z_i < 4
 			&& i < mlx->imax)
 	{
 		tmp = mlx->z_r;
-		mlx->z_r = mlx->z_r * mlx->z_r - mlx->z_i * mlx->z_i + mlx->c_r;
-		mlx->z_i = 2 * mlx->z_i * tmp + mlx->c_i;
+		mlx->z_r = sin(mlx->z_r * mlx->z_r - mlx->z_i * mlx->z_i) + mlx->c_r;
+		mlx->z_i = sin(2 * mlx->z_i * tmp) + mlx->c_i;
 		i++;
 	}
 	return (i);
 }
 
-void		julia_calc(t_mlx *mlx)
+void		spider_calc(t_mlx *mlx)
 {
 	double	x;
 	double	y;
@@ -54,9 +52,11 @@ void		julia_calc(t_mlx *mlx)
 		y = -1;
 		while (++y < W_WIN)
 		{
-			mlx->z_r = x / mlx->zoom + mlx->x1;
-			mlx->z_i = y / mlx->zoom + mlx->y1;
-			i = julia_while(0, 0.0, mlx);
+			mlx->c_r = x / mlx->zoom + mlx->x1;
+			mlx->c_i = y / mlx->zoom + mlx->y1;
+			mlx->z_r = 0;
+			mlx->z_i = 0;
+			i = spider_while(0, 0.0, mlx);
 			if (i == mlx->imax)
 				put_pixel_to_img(mlx, 0, x, y);
 			else

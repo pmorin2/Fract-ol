@@ -6,7 +6,7 @@
 /*   By: pmorin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 13:32:33 by pmorin            #+#    #+#             */
-/*   Updated: 2018/12/18 13:46:54 by pmorin           ###   ########.fr       */
+/*   Updated: 2018/12/19 13:24:01 by pmorin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define K_PLUS 69
 # define K_MINUS 78
 # define CTRL 256
-# define CLEAR
-# define PAGE_UP
-# define PAGE_DOWN
+# define CLEAR 71
+# define PAGE_UP 116
+# define PAGE_DOWN 121
 #endif

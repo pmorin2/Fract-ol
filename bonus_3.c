@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   bonus_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmorin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/18 13:22:03 by pmorin            #+#    #+#             */
-/*   Updated: 2018/12/19 16:02:53 by pmorin           ###   ########.fr       */
+/*   Created: 2018/12/19 15:03:42 by pmorin            #+#    #+#             */
+/*   Updated: 2018/12/19 15:51:27 by pmorin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,36 @@
 #include "mlx.h"
 #include "libft.h"
 #include <stdio.h>
+#include <math.h>
 
-int			julia_init(t_mlx *mlx)
+int			bonus_3_init(t_mlx *mlx)
 {
-	mlx->x1 = -1.5;
-	mlx->y1 = -1.5;
+	mlx->x1 = -1.65;
+	mlx->y1 = -1.65;
 	mlx->imax = 50;
-	mlx->zoom = 250.0;
+	mlx->zoom = 240.0;
 	mlx->palette_nbr = 0;
 	mlx->mouse_act = 0;
 	mlx->c_r = 0.285;
 	mlx->c_i = 0.01;
-	julia_calc(mlx);
+	bonus_3_calc(mlx);
 	return (0);
 }
 
-static int	julia_while(int i, double tmp, t_mlx *mlx)
+static int	bonus_3_while(int i, double tmp, t_mlx *mlx)
 {
 	while (mlx->z_r * mlx->z_r + mlx->z_i * mlx->z_i < 4
 			&& i < mlx->imax)
 	{
 		tmp = mlx->z_r;
-		mlx->z_r = mlx->z_r * mlx->z_r - mlx->z_i * mlx->z_i + mlx->c_r;
-		mlx->z_i = 2 * mlx->z_i * tmp + mlx->c_i;
+		mlx->z_r = (mlx->z_r * mlx->z_r - mlx->z_i * mlx->z_i) + mlx->c_r;
+		mlx->z_i = sin(2 * mlx->z_i * tmp) + mlx->c_i;
 		i++;
 	}
 	return (i);
 }
 
-void		julia_calc(t_mlx *mlx)
+void		bonus_3_calc(t_mlx *mlx)
 {
 	double	x;
 	double	y;
@@ -56,7 +57,7 @@ void		julia_calc(t_mlx *mlx)
 		{
 			mlx->z_r = x / mlx->zoom + mlx->x1;
 			mlx->z_i = y / mlx->zoom + mlx->y1;
-			i = julia_while(0, 0.0, mlx);
+			i = bonus_3_while(0, 0.0, mlx);
 			if (i == mlx->imax)
 				put_pixel_to_img(mlx, 0, x, y);
 			else
