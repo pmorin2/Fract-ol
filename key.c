@@ -6,7 +6,7 @@
 /*   By: pmorin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 13:32:41 by pmorin            #+#    #+#             */
-/*   Updated: 2018/12/19 16:25:25 by pmorin           ###   ########.fr       */
+/*   Updated: 2018/12/21 13:17:55 by pmorin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ int			keypress(int key, t_mlx *mlx)
 	else
 		return (0);
 	mlx_destroy_image(mlx->init, mlx->img);
-	mlx->img = mlx_new_image(mlx->init, W_WIN, H_WIN);
-	mlx->img_ptr = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->size_line
-									, &mlx->endian);
+	if (!(mlx->img = mlx_new_image(mlx->init, W_WIN, H_WIN))
+		|| !(mlx->img_ptr = mlx_get_data_addr(mlx->img, &mlx->bpp
+							, &mlx->size_line, &mlx->endian)))
+		exit(1);
 	frac_cal(mlx);
 	return (0);
 }
@@ -82,9 +83,10 @@ int			mouse_zoom(int button, int x, int y, t_mlx *mlx)
 	else
 		return (0);
 	mlx_destroy_image(mlx->init, mlx->img);
-	mlx->img = mlx_new_image(mlx->init, W_WIN, H_WIN);
-	mlx->img_ptr = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->size_line
-									, &mlx->endian);
+	if (!(mlx->img = mlx_new_image(mlx->init, W_WIN, H_WIN))
+		|| !(mlx->img_ptr = mlx_get_data_addr(mlx->img, &mlx->bpp
+							, &mlx->size_line, &mlx->endian)))
+		exit(1);
 	frac_cal(mlx);
 	return (0);
 }
@@ -96,9 +98,10 @@ int			julia_mouse(int x, int y, t_mlx *mlx)
 	mlx->c_r = (double)((x - W_WIN / 2) / mlx->zoom);
 	mlx->c_i = (double)((y - H_WIN / 2) / mlx->zoom);
 	mlx_destroy_image(mlx->init, mlx->img);
-	mlx->img = mlx_new_image(mlx->init, W_WIN, H_WIN);
-	mlx->img_ptr = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->size_line
-									, &mlx->endian);
+	if (!(mlx->img = mlx_new_image(mlx->init, W_WIN, H_WIN))
+		|| !(mlx->img_ptr = mlx_get_data_addr(mlx->img, &mlx->bpp
+							, &mlx->size_line, &mlx->endian)))
+		exit(1);
 	frac_cal(mlx);
 	return (0);
 }
