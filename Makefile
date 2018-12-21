@@ -6,12 +6,12 @@
 #    By: pmorin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/14 15:43:01 by pmorin            #+#    #+#              #
-#    Updated: 2018/12/19 15:32:32 by pmorin           ###   ########.fr        #
+#    Updated: 2018/12/20 16:14:45 by pmorin           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME= fractol
-LIB= libft/libft.a
+LIB= libft/libft.a minilibx_macos/libmlx.a
 FLAGS= -Wall -Wextra -Werror
 CC= gcc
 _GREEN= $'\x1b[32m'
@@ -23,8 +23,9 @@ all: $(NAME)
 	@echo "${_GREEN}Fractol is ready !${_GREEN}"
 
 $(NAME): $(OBJS)
+	@make -C minilibx_macos/
 	@make -C libft/
-	@gcc -o $@ $(OBJS) $(LIB) -lmlx -framework OpenGL -framework AppKit
+	@gcc -o $@ $(OBJS) $(LIB) -framework OpenGL -framework AppKit
 
 .c.o:
 	$(CC) -c $^ -o $@ $(FLAGS) -I libft/ -I minilibx_macos/
@@ -34,9 +35,11 @@ $(NAME): $(OBJS)
 clean:
 	rm -f *.o
 	rm -f libft/*.o
+	rm -f minilibx_macos/*.o
 
 fclean: clean
 	rm -f fractol
 	rm -f libft/libft.a
+	rm -f minilibx_macos/libmlx.a
 
 re: fclean all
